@@ -10,7 +10,6 @@ function getParameterByName(name, url) {
 }
 
 var ta = document.getElementById("textarea");
-
 var stack = [];
 var previousStart;
 var last;
