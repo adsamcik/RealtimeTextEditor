@@ -1,0 +1,36 @@
+body {
+	margin: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	background: #222;
+	width: 100%;
+	font-family: verdana;
+}
+
+#title {
+	color: #aaa;
+	left: 12%;
+	right: 12%;
+	top: 10dp;
+	font-size: 20dp;
+	position: absolute;
+}
+
+.textWrapper {
+	position: absolute;
+	top: 30dp;
+	left: 10%;
+	right: 10%;
+	bottom: 0;
+	padding: 1%;
+	background: #333;
+}
+
+#textarea {
+	width: 100%;
+	height: 100%;
+	border: 0;
+	background: #333;
+	color: #eee;
+}

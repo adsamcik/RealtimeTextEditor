@@ -9,8 +9,11 @@ ta.addEventListener("keydown", update);
 var stack = [];
 var previousStart;
 var last;
+var fileName = "data.txt";
 
-promise.get("data.txt", null, null).then(function (error, text, xhr) {
+
+document.getElementById("title").innerHTML = fileName;
+promise.get(fileName, null, null).then(function (error, text, xhr) {
 	ta.textContent = text;
 });
 
