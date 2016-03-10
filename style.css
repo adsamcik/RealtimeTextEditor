@@ -12,14 +12,14 @@ body {
 	color: #aaa;
 	left: 12%;
 	right: 12%;
-	top: 10dp;
+	top: 0.5em;
 	font-size: 20dp;
 	position: absolute;
 }
 
 .textWrapper {
 	position: absolute;
-	top: 30dp;
+	top: 4em;
 	left: 10%;
 	right: 10%;
 	bottom: 0;
@@ -33,4 +33,6 @@ body {
 	border: 0;
 	background: #333;
 	color: #eee;
+	font-family: verdana;
+	resize: none;
 }
