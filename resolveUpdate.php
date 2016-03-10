@@ -12,7 +12,10 @@ function bigintval($value) {
   return 0;
 }
 
-	$fileName = "data.txt";
+	if(!isset($_POST["file"]))
+		exit(400);
+
+	$fileName = $_POST["file"];
 	$timeMilisec = floor(microtime(true)*1000);
 	$timeSec = $timeMilisec * 1000;
 
