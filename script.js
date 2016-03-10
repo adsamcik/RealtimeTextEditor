@@ -1,21 +1,32 @@
+function getParameterByName(name, url) {
+	if (!url) url = window.location.href;
+	url = url.toLowerCase(); // This is just to avoid case sensitiveness  
+	name = name.replace(/[\[\]]/g, "\\$&");
+	var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+		results = regex.exec(url);
+	if (!results) return null;
+	if (!results[2]) return '';
+	return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
 var ta = document.getElementById("textarea");
-
-
-//ta.value = "Hey I am really here";
-ta.focus();
-//ta.selectionStart = 5;
-ta.addEventListener("keydown", update);
 
 var stack = [];
 var previousStart;
 var last;
-var fileName = "data.txt";
+var fileName = getParameterByName('file');
 
-
-document.getElementById("title").innerHTML = fileName;
-promise.get(fileName, null, null).then(function (error, text, xhr) {
-	ta.textContent = text;
-});
+if (fileName === null) {
+	ta.disabled = true;
+	document.getElementById("title").innerHTML = "No file entered";
+} else {
+	ta.focus();
+	ta.addEventListener("keydown", update);
+	document.getElementById("title").innerHTML = fileName;
+	promise.get(fileName, null, null).then(function (error, text, xhr) {
+		ta.textContent = text;
+	});
+}
 
 function update(e) {
 	var event = window.event ? window.event : e;
