@@ -52,6 +52,8 @@ function bigintval($value) {
 
 	if($cache === null) $cache = array();
 
+	$result['time'] = $timeMilisec;
+
 	$changes = array();
 	$length = count($cache);
 	$lastCheck = bigintval($_POST['last']);
@@ -60,17 +62,16 @@ function bigintval($value) {
 	if($lastCheck < $minuteAgo) {
 		$result['last'] = $lastCheck;
 		$result['data'] = $text;
-		$result['time'] = $timeMilisec;
 		exit(json_encode($result));
 	}
 
 	if(is_array($cache)) {
-	foreach ($cache as $val) {
-		if($timeMilisec - $val['time'] > 60000)
-			unset($val);
-		else if($val['time'] > $lastCheck)
-			array_push($changes, $val);
-	}
+		foreach ($cache as $val) {
+			if($timeMilisec - $val['time'] > 60000)
+				unset($val);
+			else if($val['time'] > $lastCheck)
+				array_push($changes, $val);
+		}
 	}
 
 	$length = count($array);
@@ -83,7 +84,6 @@ function bigintval($value) {
 	file_put_contents($fileName.'.cache', json_encode(array_values($cache)));
 
 	$result['data'] = $changes;
-	$result['time'] = $timeMilisec;
 	exit(json_encode($result));
 		//echo "\nBEGIN\n";
 	//echo $text;

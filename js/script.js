@@ -67,6 +67,7 @@ function send() {
 			Accept: "application/json"
 		};
 		promise.post("resolveUpdate.php", {
+			file: fileName,
 			data: JSON.stringify(stack),
 			last: last
 		}, xhr).then(
