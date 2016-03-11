@@ -30,6 +30,8 @@ if (fileName === null) {
 function update(e) {
 	var event = window.event ? window.event : e;
 	console.log(event.keyCode);
+	if (event.keyCode === 0)
+		return;
 	if (event.key == "Backspace") resolveBackspace(event.key);
 	else if (event.key === "Tab") resolveNewKey(resolveTab(event));
 	else if (isValidKey(event)) resolveNewKey(event.key);
@@ -39,7 +41,7 @@ function isValidKey(e) {
 	var key = e.keyCode;
 	if (e.ctrlKey || e.altKey)
 		return false;
-	return key != 16 && key != 17 && key != 18 && key != 20 && key != 37 && key != 38 && key != 39 && key != 40 && !(key >= 112 && key <= 123);
+	return !(key >= 16 && key <= 20) && !(key >= 33 && key <= 40) && !(key >= 112 && key <= 123) && key != 144 && key != 45 && key != 46 && key != 91 && key != 27 && key != 145;
 }
 
 function resolveNewKey(key) {
