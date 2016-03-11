@@ -1,3 +1,6 @@
+//urldecode($filename)
+
+
 function getFileName() {
 	var url = window.location.href;
 	var indexOf = url.indexOf('#', 0);
@@ -28,6 +31,7 @@ function update(e) {
 	var event = window.event ? window.event : e;
 	console.log(event.keyCode);
 	if (event.key == "Backspace") resolveBackspace(event.key);
+	else if (event.key === "Tab") resolveNewKey(resolveTab(event));
 	else if (isValidKey(event)) resolveNewKey(event.key);
 }
 
@@ -48,6 +52,15 @@ function resolveNewKey(key) {
 			end: ta.selectionEnd
 		});
 	previousStart = ta.selectionStart;
+}
+
+function resolveTab(e) {
+	var tabVal = "\t";
+	var start = ta.selectionStart;
+	ta.value = ta.value.substring(0, start) + tabVal + ta.value.substr(ta.selectionEnd);
+	ta.selectionStart = ta.selectionEnd = start + 1;
+	e.preventDefault();
+	return tabVal;
 }
 
 function resolveBackspace(key) {

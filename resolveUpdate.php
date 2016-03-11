@@ -41,7 +41,7 @@ function bigintval($value) {
 		}
 		else {
 			//echo "value:" . $item["value"] . "start" . $item["start"];
-			$text = substr_replace($text, $item["value"], $item["start"], $count);
+			$text = substr_replace($text, urldecode($item["value"]), $item["start"], $count);
 		}
 	}
 
