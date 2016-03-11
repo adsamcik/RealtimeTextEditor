@@ -32,7 +32,7 @@ function update(e) {
 	console.log(event.keyCode);
 	if (event.keyCode === 0)
 		return;
-	if (event.key == "Backspace") resolveBackspace(event.key);
+	if (event.key === "Backspace" || event.key === "Delete") resolveBackspace(event.key);
 	else if (event.key === "Tab") resolveNewKey(resolveTab(event));
 	else if (isValidKey(event)) resolveNewKey(event.key);
 }
@@ -66,10 +66,20 @@ function resolveTab(e) {
 }
 
 function resolveBackspace(key) {
+	var start = ta.selectionStart;
+	var end = ta.selectionEnd;
+	if (key === "Delete" && start === end) {
+		console.log(ta.value.length + " vs " + start);
+		if (ta.value.length === start)
+			return;
+		start = end = start + 1;
+		key = "Backspace";
+	}
+
 	stack.push({
 		value: key,
-		start: ta.selectionStart,
-		end: ta.selectionEnd
+		start: start,
+		end: end
 	});
 }
 

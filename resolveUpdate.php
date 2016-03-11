@@ -34,6 +34,8 @@ function bigintval($value) {
 		else
 			$count = 0;
 		if($item["value"] == "Backspace") {
+			if($item["start"] === 0)
+				continue;
 			if($count == 0)
 				$text = substr_replace($text, "", $item["start"]-1, 1);
 			else
