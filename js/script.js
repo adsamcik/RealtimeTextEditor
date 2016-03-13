@@ -1,28 +1,29 @@
-//urldecode($filename)
-
-
-function getFileName() {
+function getFilePath() {
 	var url = window.location.href;
 	var indexOf = url.indexOf('#', 0);
 	if (indexOf + 1 == url.length)
 		return null;
-	return url.substr(indexOf + 1, url.length - indexOf);
+	return decodeURI(url.substr(indexOf + 1, url.length - indexOf));
+}
+
+function getFileNameFromPath(path) {
+	return path.replace(/^.*[\\\/]/, '');
 }
 
 var ta = document.getElementById("textarea");
 var stack = [];
 var previousStart;
 var last;
-var fileName = getFileName();
+var filePath = getFilePath();
 
-if (fileName === null) {
+if (filePath === null) {
 	ta.disabled = true;
 	document.getElementById("title").innerHTML = "No file entered";
 } else {
 	ta.focus();
 	ta.addEventListener("keydown", update);
-	document.getElementById("title").innerHTML = fileName;
-	promise.get(fileName, null, null).then(function (error, text, xhr) {
+	document.getElementById("title").innerHTML = getFileNameFromPath(filePath);
+	promise.get(filePath, null, null).then(function (error, text, xhr) {
 		ta.textContent = text;
 	});
 }
@@ -89,7 +90,7 @@ function send() {
 			Accept: "application/json"
 		};
 		promise.post("resolveUpdate.php", {
-			file: fileName,
+			file: filePath,
 			data: JSON.stringify(stack),
 			last: last
 		}, xhr).then(
