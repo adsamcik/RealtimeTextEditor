@@ -11,20 +11,22 @@ function getFileNameFromPath(path) {
 }
 
 var ta = document.getElementById("textarea");
+ta.disabled = true;
 var stack = [];
 var previousStart;
 var last;
 var filePath = getFilePath();
 
 if (filePath === null) {
-	ta.disabled = true;
 	document.getElementById("title").innerHTML = "No file entered";
 } else {
 	ta.focus();
 	ta.addEventListener("keydown", update);
 	document.getElementById("title").innerHTML = getFileNameFromPath(filePath);
 	promise.get(filePath, null, null).then(function (error, text, xhr) {
-		ta.textContent = text;
+		if (error === false)
+			ta.textContent = text;
+		ta.disabled = false;
 	});
 }
 
