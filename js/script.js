@@ -37,6 +37,7 @@ function update(e) {
 		return;
 	if (event.key === "Backspace" || event.key === "Delete") resolveBackspace(event.key);
 	else if (event.key === "Tab") resolveNewKey(resolveTab(event));
+	else if (event.key === "Enter") resolveNewKey('\r\n');
 	else if (isValidKey(event)) resolveNewKey(event.key);
 }
 
