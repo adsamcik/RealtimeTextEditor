@@ -30,6 +30,10 @@ if (filePath === null) {
 	});
 }
 
+function getCursorLine() {
+	return ta.value.substr(0, ta.selectionStart).split("\n").length;
+}
+
 function update(e) {
 	var event = window.event ? window.event : e;
 	console.log(event.keyCode);
@@ -37,7 +41,7 @@ function update(e) {
 		return;
 	if (event.key === "Backspace" || event.key === "Delete") resolveBackspace(event.key);
 	else if (event.key === "Tab") resolveNewKey(resolveTab(event));
-	else if (event.key === "Enter") resolveNewKey('\r\n');
+	else if (event.key === "Enter") resolveNewKey('\n');
 	else if (isValidKey(event)) resolveNewKey(event.key);
 }
 
